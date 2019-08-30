@@ -48,17 +48,15 @@ let appData = {
 
     // Расходы за месяц
     getExpensesMonth: function() {
-        for (let expensesMonth in appData.expenses) {
-            return expensesMonth;
+        for (let key in appData.expenses) {                 // перебор ключей в объекте
+            appData.expensesMonth += appData.expenses[key]; // суммирование и запись
         }
     },
     
     // Чистая прибыль
     getBudget: function() {
-        appData.budgetMonth =  money - appData.expenses;
-        console.log('Прибыль за месяц: ', appData.budgetMonth);
-        appData.budgetDay = appData.budgetMonth / 30;
-        console.log('Прибыль за День: ', appData.budgetDay);
+        appData.budgetMonth =  appData.budget - appData.expensesMonth;
+        appData.budgetDay = Math.floor(appData.budgetMonth / 30);
     },
 
     // Функция возвращающаяя период достижения цели
@@ -97,3 +95,7 @@ appData.getStatusIncome();
 console.log('Расходы за месяц: ' + appData.expensesMonth);
 console.log(appData.getTargetMonth()); 
 console.log(appData.getStatusIncome());
+
+for (let key in appData) {
+    console.log('Напи программа включает в себя данные: ', key);
+}
